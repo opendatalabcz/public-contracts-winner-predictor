@@ -55,16 +55,27 @@ def predictContractWinner(cur, contractId, loadSuppliers=False):
   candidates = getCandidates(cur, contractId)
   candidatesData = getCandidatesData(cur, candidates, contractId)
   ids = list(map(lambda x: x[0], candidatesData))
-  missing = len([x for x in candidates if x not in ids])
+  missing = [x for x in candidates if x not in ids]
+  missingAmount = len(missing)
+  missingRatio = float(missingAmount) / float(len(candidates))
 
   if config.get('debug'):
-    print('  missing', missing, '/', len(candidates), '=', float(missing) / float(len(candidates)))
+    print('  missing', missingAmount, '/', len(candidates), '=', missingRatio)
 
   # check if the amount of missing candidates exceeds the limit
   missingLimit = config.get('missingLimit', 0)
-  if missing > missingLimit:
+  if missingRatio > missingLimit:
     if config.get('debug'):
-      print('  skipping')
+      print('  skipping because of limit')
+    return None
+
+  # optionally load suppliers for further evaluation
+  suppliers = getSuppliers(cur, contractId) if loadSuppliers else None
+
+  # check if suppliers are not missing
+  if loadSuppliers and len(np.intersect1d(suppliers, missing)) > 0:
+    if config.get('debug'):
+      print('  skipping because of missing suppliers')
     return None
 
   # initialize corpus
@@ -89,9 +100,6 @@ def predictContractWinner(cur, contractId, loadSuppliers=False):
 
   if config.get('debug'):
     print('  corpus done')
-
-  # optionally load suppliers for further evaluation
-  suppliers = getSuppliers(cur, contractId) if loadSuppliers else None
 
   # predict winners
   threshold = config.get('similarityThreshold', -10)

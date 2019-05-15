@@ -35,6 +35,9 @@ This project is dependant on both [opendata](https://github.com/opendatalabcz/op
 - lemmatize
   - whether to lemmatize documents before vectorization
   - default is false
+- missingLimit
+  - maximum accepted ratio of missing candidates data
+  - default is 0.0
 
 ## How to run the app
 Using the run.py file:
