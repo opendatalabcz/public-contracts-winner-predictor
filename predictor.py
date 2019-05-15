@@ -43,7 +43,7 @@ def predictContractWinnerFromCorpus(corpus, ids, threshold, similarityType):
     for i in range(len(sortedCounts)):
       if counts[sortedCounts[i]] != best:
         break
-      res.append(unique[sortedCounts[i]])
+      res.append(int(unique[sortedCounts[i]]))
 
   return res
 
