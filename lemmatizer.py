@@ -1,10 +1,11 @@
 from stop_words import get_stop_words
 from string import punctuation
 from ufal.morphodita import Morpho, Tagger, Forms, TaggedLemmas, TokenRanges
+from config import config
 
 # MorphoDiTa vars
-morpho = None
-tagger = None
+morpho = Morpho.load(config['dict'])
+tagger = Tagger.load(config['tagger'])
 forms = Forms()
 lemmas = TaggedLemmas()
 tokens = TokenRanges()
@@ -13,11 +14,6 @@ tokenizer = tagger.newTokenizer()
 # Stop words and punctuation
 csStopWords = get_stop_words('czech')
 csPunctuation = punctuation + '„“‚‘…–—'
-
-def initLemmatizer(config):
-  global morpho, tagger
-  morpho = Morpho.load(config.dict)
-  tagger = Tagger.load(config.tagger)
 
 def lemmatize(text):
   res = []

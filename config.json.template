@@ -1,0 +1,5 @@
+{
+  "db": "dbname=opendata user=postgres password=postgres",
+  "dict": "czech-morfflex-161115.dict",
+  "tagger": "czech-morfflex-pdt-161115.tagger"
+}
