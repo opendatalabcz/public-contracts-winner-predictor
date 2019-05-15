@@ -1,13 +1,14 @@
 #!/usr/bin/python
 
 import sys
-from db import cur
+from db import cur, close
 from predictor import predictContractWinner
 from success import calculateSuccess
 
 def main(argv, argc):
   if argc == 0:
     print('Missing contract ID!')
+    close()
     sys.exit(1)
 
   contractId = int(argv[0])
@@ -25,3 +26,4 @@ def main(argv, argc):
 
 if __name__ == '__main__':
   main(sys.argv[1:], len(sys.argv) - 1)
+  close()
