@@ -14,7 +14,6 @@ This project is dependant on both [opendata](https://github.com/opendatalabcz/op
 6. Create config.json (using the [config.json.template](config.json.template) file).
 
 ## Configuration
-
 - db
   - psycopg2 connection string as specified [here](http://initd.org/psycopg/docs/module.html)
   - required
@@ -60,3 +59,26 @@ py test.py
 # and store predictions to a JSON file
 py test.py export.json
 ```
+
+## Experiments
+The application has been tested on public contracts of Czech ministries for several configurations using leave-one-out cross-validation. Results can be seen in the following table:
+
+| similarityType | similarityThreshold | lemmatize | missingLimit | contracts amount | success (absolute equality\*) | accuracy |
+|-|-|-|-|-|-|-|
+| cos | 0.3 | true | 0.0 | 163 | 0.724 | 0.836 |
+| cos | 0.9 | true | 0.0 | 163 | 0.736 | 0.862 |
+| cos | 0.3 | false | 0.0 | 163 | 0.748 | 0.861 |
+| cos | 0.9 | false | 0.0 | 163 | 0.755 | 0.871 |
+| euc | -10 | true | 0.0 | 163 | 0.773 | 0.856 |
+| euc | -0.9 | false | 0.0 | 163 | 0.773 | 0.867 |
+| euc | -1 | false | 0.0 | 163 | 0.804 | 0.878 |
+| euc | -10 | false | 0.0 | 163 | 0.804 | 0.881 |
+| euc | -10 | false | 0.3 | 272 | 0.691 | 0.873 |
+| euc | -10 | false | 0.4 | 350 | 0.706 | 0.881 |
+| euc | -10 | false | 0.5 | 472 | 0.758 | 0.907 |
+
+As you can see, best results were obtained using euclidean similarity and threshold of -10. Surprisingly lemmatization had a negative impact on the score.
+
+Even when working with incomplete data (see rows with missingLimit > 0), the accuracy is about 88 %. Also in majority of cases, the success (absolute equality\*) is over 70 %.
+
+\* Absolute equality means that the prediction and actual suppliers must be completely the same. For example when candidates are [1, 2, 3] and suppliers are [1], then the prediction must be exactly [1]. However if the prediction would be [1, 2] (because entities 1 & 2 might be very similar), then it would help only to the accuracy mesaure and not to the success measure.
