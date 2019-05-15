@@ -1,5 +1,6 @@
 numpy~=1.15.3
 psycopg2~=2.8.2
-scikit-learn~=0.20.0
 scipy~=1.1.0
+scikit-learn~=0.20.0
+stop-words==2018.7.23
 ufal.morphodita~=1.9.2.1
