@@ -77,7 +77,7 @@ The application has been tested on public contracts of Czech ministries for seve
 | euc | -10 | false | 0.4 | 350 | 0.706 | 0.881 |
 | euc | -10 | false | 0.5 | 472 | 0.758 | 0.907 |
 
-As you can see, best results were obtained using euclidean similarity and threshold of -10. Surprisingly lemmatization had a negative impact on the score.
+As you can see, best results were obtained using euclidean similarity and threshold of -10. Surprisingly lemmatization had a negative impact on the score and also was really slow compared to plain vectorization.
 
 Even when working with incomplete data (see rows with missingLimit > 0), the accuracy is about 88 %. Also in majority of cases, the success (absolute equality\*) is over 70 %.
 
