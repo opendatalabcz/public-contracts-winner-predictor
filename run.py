@@ -3,7 +3,7 @@
 import sys
 from db import cur, close
 from predictor import predictContractWinner
-from success import calculateSuccess
+from score import calculateScore
 
 def main(argv, argc):
   if argc == 0:
@@ -21,8 +21,8 @@ def main(argv, argc):
 
     if loadSuppliers:
       print('suppliers:', res['suppliers'])
-      success = calculateSuccess(res)
-      for key, value in success.items():
+      score = calculateScore(res)
+      for key, value in score.items():
         print(key, value)
   else:
     print('No result!')

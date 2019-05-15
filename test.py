@@ -3,7 +3,7 @@
 import sys
 from db import cur, close
 from predictor import predictContractWinner
-from success import calculateSuccess
+from score import calculateScore
 from data_loader import getContractsWithDocumentation
 import numpy as np
 import json
@@ -29,8 +29,8 @@ def main(argv, argc):
       print('  candidates:', res['candidates'])
       print('  prediction:', res['prediction'])
       print('  suppliers:', res['suppliers'])
-      success = calculateSuccess(res)
-      for key, value in success.items():
+      score = calculateScore(res)
+      for key, value in score.items():
         avg[key].append(value)
     else:
       print('  No result!')

@@ -1,7 +1,7 @@
 import numpy as np
 
 # Calculate success, precission, recall and accuracy
-def calculateSuccess(res):
+def calculateScore(res):
   tp = len(np.intersect1d(res['suppliers'], res['prediction']))
   fp = len(np.setdiff1d(res['prediction'], res['suppliers']))
   tn = len(np.setdiff1d(np.setdiff1d(res['candidates'], res['suppliers']), res['prediction']))
