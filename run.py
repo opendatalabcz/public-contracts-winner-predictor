@@ -14,7 +14,7 @@ def main(argv, argc):
   contractId = int(argv[0])
   loadSuppliers = argv[1] == 'true' if argc > 1 else False
 
-  res = None#predictContractWinner(cur, contractId, loadSuppliers)
+  res = predictContractWinner(cur, contractId, loadSuppliers)
   if res:
     print('candidates:', res['candidates'])
     print('prediction:', res['prediction'])
