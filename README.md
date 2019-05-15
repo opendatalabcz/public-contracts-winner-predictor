@@ -1,6 +1,6 @@
 # public-contracts-winner-predictor
 
-## About project
+## About this project
 The goal of this project is to predict a winner of a public contract using the contract's documentation.
 
 This project is dependant on both [opendata](https://github.com/opendatalabcz/opendata) and [public-contracts](https://github.com/opendatalabcz/public-contracts) projects.
@@ -26,12 +26,12 @@ This project is dependant on both [opendata](https://github.com/opendatalabcz/op
   - default is false
 - similarityType
   - whether to use cosine similarity (cos) or euclidean similarity (euc)
-  - default is cos
+  - default is euc
 - similarityThreshold
   - similarity value below which documents are ignored
-    - e.g. if the best fit for a document has similarity of 0.25, it's not accepted.
-  - default is 0.3
-  - Note that when using euclidean similarity, all values are negative or zero (the best possible value).
+    - e.g. for cosine similarity and threshold = 0.3, if the best fit for a document has similarity of 0.29, it's not accepted.
+  - default is -10
+  - note that when using euclidean similarity, all values are negative or zero (the best possible value)
 - lemmatize
   - whether to lemmatize documents before vectorization
   - default is false

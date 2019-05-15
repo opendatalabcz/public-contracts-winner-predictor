@@ -94,8 +94,8 @@ def predictContractWinner(cur, contractId, loadSuppliers=False):
   suppliers = getSuppliers(cur, contractId) if loadSuppliers else None
 
   # predict winners
-  threshold = config.get('similarityThreshold', 0.3)
-  similarityType = config.get('similarityType', 'cos')
+  threshold = config.get('similarityThreshold', -10)
+  similarityType = config.get('similarityType', 'euc')
   prediction = predictContractWinnerFromCorpus(corpus, ids, threshold, similarityType)
 
   return {
