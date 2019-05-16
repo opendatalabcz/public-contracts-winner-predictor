@@ -13,7 +13,7 @@ def main(argv, argc):
 
   avg = {
     'success': [],
-    'precission': [],
+    'precision': [],
     'recall': [],
     'accuracy': [],
   }

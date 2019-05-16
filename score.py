@@ -1,6 +1,6 @@
 import numpy as np
 
-# Calculate success, precission, recall and accuracy
+# Calculate success, precision, recall and accuracy
 def calculateScore(res):
   tp = len(np.intersect1d(res['suppliers'], res['prediction']))
   fp = len(np.setdiff1d(res['prediction'], res['suppliers']))
@@ -9,7 +9,7 @@ def calculateScore(res):
 
   return {
     'success': 1 if np.array_equal(res['suppliers'], res['prediction']) else 0,
-    'precission': float(tp) / (float(tp) + float(fp)) if tp + fp != 0 else 0,
+    'precision': float(tp) / (float(tp) + float(fp)) if tp + fp != 0 else 0,
     'recall': float(tp) / (float(tp) + float(fn)) if tp + fn != 0 else 0,
     'accuracy': (float(tp) + float(tn)) / float(len(res['candidates'])),
   }
